@@ -1,0 +1,18 @@
+function distPP(b1,b2:objet;out p,pp:tpoint):real;
+var i,j:integer;dist,Min:real;A,B,C,D,V,W:tpoint;
+begin
+Min:=99999999;
+for i:=0 to length(b1.ListePoint)-1 do //don't forget the last segment [Pn-1,P0] of b1, that's why I used mod
+    begin
+    A:=b1.listepoint[i];
+    B:=b1.listepoint[(i+1)mod length(b1.listepoint)];
+    for j:=0 to length(b2.ListePoint)-1 do //don't forget the last segment [Pn-1,P0] of b2
+	      begin
+        C:=b2.listepoint[j];
+        D:=b2.listepoint[(j+1)mod length(b2.listepoint)];
+        Dist:=DistSegSeg(A,B,C,D,V,W);
+        if Dist<min then begin min:=dist;P:=V;PP:=W;end;
+	      end;
+    end;
+distPP:=min;
+end;
